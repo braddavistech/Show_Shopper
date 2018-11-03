@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="author" content="BradDavis">
+  <meta name="description" content="Brad Davis is a passionate developer who strives to make life more convenient through technology. If it is a custom application, a personal webpage, or just a side project, Brad takes an idea and brings it to life.">
+  <title>Brad Davis, Aspiring Developer</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <link rel="icon" href="/images/BDTechLogo.jpg" type="image/jpg">
+  <link rel="shortcut icon" href="/BDTechLogo.jpg" type="image/jpg">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="ticketmaster.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+</head>
+
+<body>
+  <div id="login">
+    <p id="appTitle">SHOW SHOPPER</p>
+    <p id="tagLine">NEVER MISS ANOTHER SHOW STOPPER</p>
+    <section id="selectSection">
+      <label for="selectSearch" class="labelName">Choose Search Category</label>
+      <select type="text" name="selectSearch" id="searchCategory">
+        <option value="1">All My Artists</option>
+        <option value="2">All My Tracks</option>
+        <option value="3">Recently Played</option>
+      </select>
+      <button id="login-button" class="btn btn-primary">LOG IN WITH SPOTIFY</button>
+    </section>
+  </div>
+
+  <div id="sponsorFooter">
+    <p id="websitePlug">Proudly built by Brad Davis for VANDYHACK V</p>
+  </div>
+
+  <div id="user-profile"></div>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="data.js"></script>
+
+</html>
