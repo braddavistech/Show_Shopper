@@ -67,7 +67,7 @@
       $('#loggedin').hide();
     }
 
-    
+
     // const showArtists = () => {
     //   let temp = localStorage.getItem(artistList);
     //   let artists = temp.split(",")
@@ -77,6 +77,10 @@
 
     document.getElementById('login-button').addEventListener('click', function () {
       let searchCat = document.getElementById("searchCategory").value;
+      if (searchCat === "0") {
+        alert("Please choose a category to search by.")
+        return;
+      }
       var client_id = '6cb514e280c24f05a25ef6bf097fde84';
       // TODO: Need to figure out how to keep my client id secret
       var redirect_uri = 'http://localhost:8888';

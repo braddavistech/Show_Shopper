@@ -1,19 +1,34 @@
 const clickPrint = () => {
+  if (event.target.name === "button") {
   let artistName = event.target.value;
-  let hideElements = document.querySelectorAll(".indivArtists");
-  $('.indivArtists').hide();
-  $(`#${event.target.value}`).show();
-  // hideElements.forEach(element => {
-  //   if (element.id !== event.target.value) {
-  //     element.
-  //   }
-  // })
-  console.log(artistName, event.target.value);
-  let spaceHolder = artistName.indexOf(" ");
-  console.log(spaceHolder);
-  console.log(artistName);
+  console.log(event.target);
+  event.target.innerHTML = "Hide Events";
+  event.target.parentNode.removeEventListener("click", clickPrint);
+  event.target.parentNode.addEventListener("click", hideShows);
   ticketmasterFetch(artistName);
+  }
 };
+
+const hideShows = () => {
+  if (event.target.name === "button") {
+  let parentNode = document.getElementById(`${event.target.value}`).parentElement;
+  let hideInfo = event.target.parentNode.nextSibling;
+  hideInfo.innerHTML = "";
+  event.target.innerHTML = "Search for Events";
+  event.target.parentNode.removeEventListener("click", hideShows);
+  event.target.parentNode.addEventListener("click", clickPrint);
+  } else {alert("not a button")}
+}
+
+const fixGenreName = (genre) => {
+  genre = genre.split(" ")
+  for (let i = 0; i < genre.length; i++) {
+  genre[i] = genre[i].charAt(0).toUpperCase() + genre[i].substring(1);
+  }
+  genre = genre.join(" ");
+  genre = "&sung; " + genre;
+  return genre;
+}
 
 const printArtists = (response, localScope) => {
   let stringHolder = "";
@@ -61,15 +76,15 @@ const printArtists = (response, localScope) => {
       artistArray.push(artist.name)
       stringHolder += `<div class="indivArtist" id="${artist.name}"><h1 class="artistName">${artist.name}</h1><h3 class="genreCat">GENRES</h3>`;
       artist.genres.forEach(genre => {
-        stringHolder += `<p class="genreName">${genre}</p>`;
+        stringHolder += `<p class="genreName">${fixGenreName(genre)}</p>`;
       })
-      stringHolder += `<button class="selectArtist" id="${artist.name}" value="${artist.name}">Search for Concerts</button><img class="artistPic" src="${artist.images[0].url}"></div><div class="concerts" name="${artist.name}" id="${artist.name}"></div>`;
+      stringHolder += `<button class="selectArtist" name="button" id="${artist.name}" value="${artist.name}">Search for Events</button><img class="artistPic" src="${artist.images[0].url}"></div><div class="concerts" name="${artist.name}" id="${artist.name}1"></div>`;
     })
   } else if (localScope === "top/tracks?time_range=short_term&limit=10") {
     response.items.forEach(track => {
       artistArray.push(track.artists[0].name)
       let rank = popRating(track.popularity);
-      stringHolder += `<div class="indivTracks" id="${track.artists[0].name}"><h1 class="songName">${track.name}</h1><h3 class="trackArtist">By ${track.artists[0].name}</h3><h3 class="releaseDate">Released on ${track.album.release_date}</h3><h3 class="trackPopularity">Spotify Rank</h3>${rank}<button class="selectArtist" id="${track.artists[0].name}" value="${track.artists[0].name}">Search for Concerts</button><img class="artistPic" src="${track.album.images[0].url}"></div><div class="concerts" name="${track.artists[0].name}" id="${track.artists[0].name}"></div>`;
+      stringHolder += `<div class="indivTracks" id="${track.artists[0].name}"><h1 class="songName">${track.name} by ${track.artists[0].name}</h1><h3 class="releaseDate">${track.album.release_date}</h3><h3 class="trackPopularity">Rank${rank}</h3><button class="selectArtist" name="button" id="${track.artists[0].name}" value="${track.artists[0].name}">Search for Concerts</button><img class="artistPic" src="${track.album.images[0].url}"></div><div class="concerts" name="${track.artists[0].name}" id="${track.artists[0].name}1"></div>`;
     })
   } else if (localScope === "player/recently-played?limit=10") {
     response.items.forEach(eachTrack => {
@@ -78,7 +93,7 @@ const printArtists = (response, localScope) => {
       let tempDate = convertDate(eachTrack.played_at);
       let tempTime = convertTime(eachTrack.played_at);
       // TODO:Need to fix href for the songs to be able to hear the songs.
-      stringHolder += `<div class="indivTracks" id="${eachTrack.track.artists[0].name}"><h1 class="songName">${eachTrack.track.name}</h1><h3 class="trackArtist">${eachTrack.track.artists[0].name}</h3><h3 class="lastPlayed">Listened to on ${tempDate} at ${tempTime}</h3><h3 class="releaseDate">${eachTrack.track.album.name}</h3><h3 class="trackPopularity">Spotify Rank</h3>${rank}<button class="selectArtist" id="${eachTrack.track.artists[0].name}" value="${eachTrack.track.artists[0].name}">Search for Concerts</button><img class="artistPic" src="${eachTrack.track.album.images[0].url}"><a href=${eachTrack.track.external_urls} target="blank" id="playLink">Hear Song On Spotify</a></div><div class="concerts" name="${eachTrack.track.artists[0].name}" id="${eachTrack.track.artists[0].name}"></div>`;
+      stringHolder += `<div class="indivTracks" id="${eachTrack.track.artists[0].name}"><h1 class="songName">${eachTrack.track.name} by ${eachTrack.track.artists[0].name}</h1><h3 class="lastPlayed">Listened to on ${tempDate} at ${tempTime}</h3><h3 class="releaseDate">${eachTrack.track.album.name}</h3><h3 class="trackPopularity">Spotify Rank${rank}</h3><button class="selectArtist" name="button" id="${eachTrack.track.artists[0].name}" value="${eachTrack.track.artists[0].name}">Search for Concerts</button><img class="artistPic" src="${eachTrack.track.album.images[0].url}"><a href=${eachTrack.track.external_urls} target="blank" id="playLink">NOT YET Hear Song On Spotify</a></div><div class="concerts" name="${eachTrack.track.artists[0].name}" id="${eachTrack.track.artists[0].name}1"></div>`;
     })
   }
   userProfilePlaceholder.innerHTML = stringHolder;
@@ -134,9 +149,9 @@ const printConcerts = (temp, showNationwide) => {
       tempString += `<div class="concertShow">${showNationwide[i].name}<p class="showCity">${showNationwide[i]._embedded.venues[0].name} in ${showNationwide[i]._embedded.venues[0].city.name}, ${showNationwide[i]._embedded.venues[0].state.name}</p><p class="showDate">${showNationwide[i].dates.start.localDate}</p></div>`
   }
 
-  let artistGrab = document.getElementById(temp);
+  let artistGrab = document.getElementById(`${temp}1`);
   artistGrab.innerHTML += tempString;
-  
+
 }
   //   }
   // })
