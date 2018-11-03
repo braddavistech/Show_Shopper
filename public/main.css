@@ -124,11 +124,13 @@
 }
 .recordPic {
   diplay: inline-flex;
-  width: 10%;
+  width: 8%;
+  margin: 1%;
 }
 .halfRec {
   diplay: inline-flex;
-  width: 5%;
+  width: 4%;
+  margin: 1%
 }
 .artistPic {
   width: 25%;
