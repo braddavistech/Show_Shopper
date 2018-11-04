@@ -41,6 +41,7 @@
 .labelName {
   display: inline-block;
   margin-bottom: 1vw;
+  margin-top: 1.5vw;
   font-size: 2vw;
   font-weight: bold;
 }
@@ -95,7 +96,6 @@
 }
 .artistPic {
   width: 20%;
-  position: relative;
   margin-left: 40%;
   display: block;
   margin-bottom: 1vw;
@@ -115,7 +115,6 @@
 .indivTracks {
   text-align: center;
   margin: 3vw;
-  display: grid;
   background-color: beige;
   border-radius: 15px;
   border: 2px solid;
@@ -124,31 +123,28 @@
   margin: 0px;
   font-weight: bold;
   font-size: 3vw;
-  width: 50%;
+  width: 100%;
 }
 .releaseDate {
   margin-top: .5vw;
   font-size: 2vw;
-  width: 50%;
+  width: 100%;
   font-weight: bold;
 }
 .trackPopularity {
-  left: 50%;
   font-size: 2vw;
   margin: 0px;
-  width: 50%;
-  top: -6.5vw;
-  position: relative;
+  width: 100%;
   font-weight: bold;
 }
 .recordPic {
-  width: 8%;
+  width: 5%;
   padding: .25vw;
   padding-top: 0.95vw;
   vertical-align: middle;
 }
 .halfRec {
-  width: 4%;
+  width: 2.5%;
   padding: .25vw;
   padding-top: 0.95vw;
   vertical-align: middle;
@@ -156,6 +152,9 @@
 .trackArtist {
   padding: 0px;
   position: relative;
+}
+#searchDate {
+  font-weight: bold;
 }
 #sponsorFooter {
   position: fixed;
@@ -178,7 +177,6 @@
 .lastPlayed {
   margin-top: .5vw;
   font-size: 2vw;
-  width: 50%;
   font-weight: bold;
 }
 .concertShow {
