@@ -22,6 +22,7 @@
   };
 
   let searchItem;
+  let searchTime;
 
 
   var params = getHashParams();
@@ -68,12 +69,7 @@
     }
 
 
-    // const showArtists = () => {
-    //   let temp = localStorage.getItem(artistList);
-    //   let artists = temp.split(",")
-    //   console.log(artists);
-    //   ticketmasterFetch();
-    // }
+
 
     document.getElementById('login-button').addEventListener('click', function () {
       let searchCat = document.getElementById("searchCategory").value;
